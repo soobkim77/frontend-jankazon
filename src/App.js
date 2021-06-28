@@ -29,7 +29,7 @@ class App extends React.Component {
 
   //Backend Requests
   getItems = () => {
-    fetch("http://127.0.0.1:9393/items/")
+    fetch("http://127.0.0.1:3000/items/")
     .then(r => r.json())
     .then(data => {
       this.setState({items: data.items})
@@ -37,7 +37,7 @@ class App extends React.Component {
   }
 
   getUsers = () => {
-    fetch("http://127.0.0.1:9393/users/")
+    fetch("http://127.0.0.1:3000/users/")
     .then(r => r.json())
     .then(data => {
       this.setState({users: data.users})
@@ -64,7 +64,7 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)}
-    fetch("http://127.0.0.1:9393/login/", reqPackage)
+    fetch("http://127.0.0.1:3000/login/", reqPackage)
     .then(r => r.json())
     .then(data => {
       if (data.message == "Successful Login"){
@@ -94,7 +94,7 @@ class App extends React.Component {
       alert('Username Already Exists')
     }
     else{
-    fetch('http://127.0.0.1:9393/users/', reqPackage)
+    fetch('http://127.0.0.1:3000/users/', reqPackage)
       .then(r => r.json())
       .then(data => {
         if(!data.message){
@@ -136,7 +136,7 @@ class App extends React.Component {
       body: JSON.stringify(newItem)
     }
 
-    fetch("http://127.0.0.1:9393/items/", reqPackage)
+    fetch("http://127.0.0.1:3000/items/", reqPackage)
     .then(res => res.json())
 
     .then(data => {
@@ -209,7 +209,7 @@ class App extends React.Component {
       condition: e.target.condition.value
     };
 
-    fetch(`http://127.0.0.1:9393/items/${item.id}`, {
+    fetch(`http://127.0.0.1:3000/items/${item.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -230,7 +230,7 @@ class App extends React.Component {
 
   removeItem = (e, deleteItem) => {
     e.stopPropagation()
-    fetch(`http://127.0.0.1:9393/items/${deleteItem.id}`, {
+    fetch(`http://127.0.0.1:3000/items/${deleteItem.id}`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json'
@@ -263,7 +263,7 @@ class App extends React.Component {
       method: "POST",
       body: JSON.stringify(purchase)
     }
-    fetch(`http://127.0.0.1:9393/purchases`, reqPackage)
+    fetch(`http://127.0.0.1:3000/purchases`, reqPackage)
     .then(r => r.json())
     .then(purch =>  {this.setState({
       items: this.state.items.map(item => item.id !== purch.item.id ? item : purch.item ), itemView: false})
