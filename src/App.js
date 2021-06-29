@@ -18,7 +18,7 @@ class App extends React.Component {
     createUser: true,
     currentItem: {},
     currentUser: {},
-    isLoggedIn: false,
+    isLoggedIn: true,
     user: {
       username: "",
       password: ""
@@ -32,15 +32,8 @@ class App extends React.Component {
     fetch("http://127.0.0.1:3000/items/")
     .then(r => r.json())
     .then(data => {
+      console.log(data)
       this.setState({items: data.items})
-    })
-  }
-
-  getUsers = () => {
-    fetch("http://127.0.0.1:3000/users/")
-    .then(r => r.json())
-    .then(data => {
-      this.setState({users: data.users})
     })
   }
 
@@ -64,7 +57,7 @@ class App extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(user)}
-    fetch("http://127.0.0.1:3000/login/", reqPackage)
+    fetch("http://127.0.0.1:3000/sessions/", reqPackage)
     .then(r => r.json())
     .then(data => {
       if (data.message == "Successful Login"){
@@ -113,7 +106,7 @@ class App extends React.Component {
 
   componentDidMount = () => {
     this.getItems()
-    this.getUsers()
+    // this.getUsers()
   }
 
   //
@@ -161,10 +154,10 @@ class App extends React.Component {
   }
 
 
-  itemsByUser = () => {
-    let items =  this.state.items.filter(item => item.seller.id == this.state.currentUser.id)
-    return items
-  }
+  // itemsByUser = () => {
+  //   let items =  this.state.items.filter(item => item.seller.id == this.state.currentUser.id)
+  //   return items
+  // }
 
 
   viewItem = (e,item) => {
@@ -203,10 +196,8 @@ class App extends React.Component {
       name: e.target.name.value,
       image: e.target.image.value,
       seller: this.state.currentItem.seller,
-      category: e.target.category.value,
       description: e.target.description.value,
       price: e.target.price.value,
-      condition: e.target.condition.value
     };
 
     fetch(`http://127.0.0.1:3000/items/${item.id}`, {
@@ -250,27 +241,27 @@ class App extends React.Component {
   })
   }
 
-  buyItem = (e, item) => {
-    e.stopPropagation()
-    let purchase = {
-      item_id: item.id,
-      seller_id: item.seller.id,
-      purchaser_id: this.state.currentUser.id
-    }
+  // buyItem = (e, item) => {
+  //   e.stopPropagation()
+  //   let purchase = {
+  //     item_id: item.id,
+  //     seller_id: item.seller.id,
+  //     purchaser_id: this.state.currentUser.id
+  //   }
 
-    let reqPackage = {
-      headers: {"Content-Type":"application/json"},
-      method: "POST",
-      body: JSON.stringify(purchase)
-    }
-    fetch(`http://127.0.0.1:3000/purchases`, reqPackage)
-    .then(r => r.json())
-    .then(purch =>  {this.setState({
-      items: this.state.items.map(item => item.id !== purch.item.id ? item : purch.item ), itemView: false})
-      this.props.history.push(`/users/${this.state.currentUser.id}`)
-    }
-    )
-  }
+  //   let reqPackage = {
+  //     headers: {"Content-Type":"application/json"},
+  //     method: "POST",
+  //     body: JSON.stringify(purchase)
+  //   }
+  //   fetch(`http://127.0.0.1:3000/purchases`, reqPackage)
+  //   .then(r => r.json())
+  //   .then(purch =>  {this.setState({
+  //     items: this.state.items.map(item => item.id !== purch.item.id ? item : purch.item ), itemView: false})
+  //     this.props.history.push(`/users/${this.state.currentUser.id}`)
+  //   }
+  //   )
+  // }
 
   render(){
     return (

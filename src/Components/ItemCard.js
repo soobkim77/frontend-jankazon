@@ -14,8 +14,7 @@ const ItemCard = (props) => {
               {props.item.description}
           </Card.Description> <br />   
           <Card.Meta >
-          <strong>Category:</strong> {props.item.category}<br />  
-          <strong>Condition:</strong> {props.item.condition}
+          {/* <strong>Condition:</strong> {props.item.condition} */}
           </Card.Meta>
         </Card.Content>
         <Card.Content extra>
