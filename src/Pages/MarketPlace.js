@@ -3,6 +3,54 @@ import ItemContainer from '../Container/ItemContainer'
 import FilterBar from '../Components/FilterBar'
 import { Grid } from "semantic-ui-react";
 import ItemSpecs from '../Components/ItemSpecs'
+import { useState } from 'react'
+
+const Market = () => {
+  const [items, setItems] = useState();
+
+  // const handleCategoryDropDown = (event, data) => {
+  //   this.setState({
+  //     categoryFilterOption: data.value
+  //   })
+  // }
+
+  //  const handleCategoryDropDown = (event, data) => {
+  //   this.setState({
+  //     categoryFilterOption: data.value
+  //   })
+  // }
+
+  //  const handleUserFilter = (e) => {
+  //   this.setState({
+  //     userFilterOption: e.target.value
+  //   })
+  // }
+
+  // const filterItems = () => {
+  //   /* Category is not All & User search is blank */
+  //   if (this.state.categoryFilterOption ===! 'all' && !this.state.userFilterOption){
+  //     return this.props.items.filter(item => item.category === this.state.categoryFilterOption)
+    
+  //     /* Category = All & User search is blank */
+  //   } else if (this.state.categoryFilterOption === 'all' && !this.state.userFilterOption){
+  //     return this.props.items 
+    
+  //     /* Category = All & User search is not blank */
+  //   } else if (this.state.categoryFilterOption === 'all' && this.state.userFilterOption){
+  //     return this.props.items.filter(item => item.name.toLowerCase().includes(this.state.userFilterOption.toLowerCase()))
+    
+  //     /* Category is not blank & User search is not blank */
+  //   } else {
+  //     return this.props.items.filter(item => item.category === this.state.categoryFilterOption && item.name.toLowerCase().includes(this.state.userFilterOption.toLowerCase()))
+  //   }
+  // }
+
+  return (
+    <div>
+
+    </div>
+  )
+}
 
 class MarketPlace extends React.Component {
 
